@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Amigo Invisible, Mariajo! 🎁</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #e8f5e9 50%, #e3f2fd 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .container {
+            text-align: left;
+            background: white;
+            backdrop-filter: blur(10px);
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+            border: 1px solid #dbdbdb;
+            overflow: hidden;
+        }
+
+        .ig-header {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border-bottom: 1px solid #efefef;
+        }
+
+        .ig-header-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid #d4a5a5;
+            object-fit: cover;
+            object-position: center 57%;
+        }
+
+        .ig-header-info {
+            flex: 1;
+        }
+
+        .ig-username {
+            font-weight: 600;
+            font-size: 14px;
+            color: #262626;
+            display: block;
+        }
+
+        .ig-location {
+            font-size: 12px;
+            color: #8e8e8e;
+        }
+
+        .ig-image-container {
+            width: 100%;
+            position: relative;
+            background: #fafafa;
+        }
+
+        .ig-image {
+            width: 100%;
+            display: block;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .ig-video {
+            width: 100%;
+            display: block;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .ig-actions {
+            display: flex;
+            padding: 8px 16px;
+            gap: 16px;
+            border-bottom: 1px solid #efefef;
+        }
+
+        .ig-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 8px 0;
+            transition: opacity 0.2s;
+        }
+
+        .ig-action-btn:hover {
+            opacity: 0.6;
+        }
+
+        .ig-likes {
+            padding: 0 16px;
+            padding-top: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #262626;
+        }
+
+        .ig-caption {
+            padding: 8px 16px;
+            font-size: 14px;
+            line-height: 18px;
+            color: #262626;
+        }
+
+        .ig-caption-username {
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .ig-view-comments {
+            padding: 8px 16px;
+            color: #8e8e8e;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .ig-view-comments:hover {
+            text-decoration: underline;
+        }
+
+        .ig-time {
+            padding: 8px 16px;
+            padding-bottom: 16px;
+            color: #8e8e8e;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        h1, .subtitle, .avatar-container, .message, .qa-badge {
+            display: none;
+        }
+
+        .bugs {
+            position: fixed;
+            font-size: 20px;
+            animation: moveBug 20s linear infinite;
+            opacity: 0.15;
+        }
+
+        @keyframes moveBug {
+            0% { transform: translateX(-100px) translateY(0) rotate(0deg); }
+            100% { transform: translateX(calc(100vw + 100px)) translateY(-30px) rotate(360deg); }
+        }
+
+        .bug1 { top: 10%; animation-duration: 18s; }
+        .bug2 { top: 25%; animation-duration: 25s; animation-delay: 3s; }
+        .bug3 { top: 45%; animation-duration: 22s; animation-delay: 6s; }
+        .bug4 { top: 60%; animation-duration: 28s; animation-delay: 2s; }
+        .bug5 { top: 75%; animation-duration: 20s; animation-delay: 4s; }
+        .bug6 { top: 88%; animation-duration: 23s; animation-delay: 1s; }
+
+        .checkmark {
+            position: fixed;
+            font-size: 30px;
+            color: #d4a5a5;
+            animation: fadeInOut 4s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 0.2; transform: scale(1) rotate(360deg); }
+        }
+
+        .check1 { top: 20%; right: 15%; animation-delay: 0s; }
+        .check2 { top: 50%; right: 10%; animation-delay: 2s; }
+        .check3 { top: 75%; right: 20%; animation-delay: 4s; }
+
+        button {
+            background: linear-gradient(135deg, #d4a5a5 0%, #b8a5d4 100%);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            font-weight: 300;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 20px rgba(212, 165, 165, 0.25);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 165, 165, 0.35);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .special-message {
+            display: none;
+        }
+
+        .special-message.show {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Bugs animados -->
+    <div class="bugs bug1">🐛</div>
+    <div class="bugs bug2">🐞</div>
+    <div class="bugs bug3">🐛</div>
+    <div class="bugs bug4">🐞</div>
+    <div class="bugs bug5">🐛</div>
+    <div class="bugs bug6">🐞</div>
+
+    <!-- Checkmarks -->
+    <div class="checkmark check1">✓</div>
+    <div class="checkmark check2">✓</div>
+    <div class="checkmark check3">✓</div>
+
+    <div class="container">
+        <!-- Instagram Header -->
+        <div class="ig-header">
+            <img src="amiga-invisible.png" alt="Tu Amiga Invisible" class="ig-header-avatar">
+            <div class="ig-header-info">
+                <span class="ig-username">tu_amiga_invisible</span>
+                <div class="ig-location">Frontend Developer 💻✨</div>
+            </div>
+            <span style="font-size: 20px; cursor: pointer; color: #262626;">⋯</span>
+        </div>
+
+        <!-- Instagram Video -->
+        <div class="ig-image-container">
+            <video class="ig-video" autoplay loop muted playsinline>
+                <source src="Video_Ready_No_Audio_Needed.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Instagram Actions -->
+        <div class="ig-actions">
+            <span class="ig-action-btn" onclick="revealMessage()" style="cursor: pointer;">❤️</span>
+            <span class="ig-action-btn" onclick="revealMessage()" style="cursor: pointer;">💬</span>
+            <span class="ig-action-btn">📩</span>
+        </div>
+
+        <!-- Instagram Likes -->
+        <div class="ig-likes">
+            Le gusta a <strong>todo_el_equipo</strong> y <strong>otras 42 personas</strong>
+        </div>
+
+        <!-- Instagram Caption -->
+        <div class="ig-caption">
+            <span class="ig-caption-username">tu_amiga_invisible</span>
+            <span id="shortCaption">
+                <strong>Queen of QA 👑</strong>
+                <br><br>
+                Eres la guardiana de la calidad, la cazadora de bugs implacable, ¡y la razón por la que nuestro código no es un desastre total! 🐛✨
+                <span style="color: #8e8e8e; cursor: pointer;" onclick="revealMessage()"> ... más</span>
+            </span>
+            <span id="fullCaption" class="hidden">
+                <strong>Queen of QA 👑</strong>
+                <br><br>
+                Eres la guardiana de la calidad, la cazadora de bugs implacable, ¡y la razón por la que nuestro código no es un desastre total! 🐛✨
+                <br><br>
+                💜 Oda a nuestra QA favorita 💜
+                <br><br>
+                Entre builds que "ya están listos" <br>
+                y entornos que nadie sabe explicar, <br>
+                apareces tú, siempre serena, <br>
+                lista para volver a probar.
+                <br><br>
+                Si falla en local, ella lo prueba sin dudar, <br>
+                si en pre algo falla, vuelve a revisar, <br>
+                si en prod se complica, nunca se queja, <br>
+                con paciencia y sonrisa, todo lo maneja.
+                <br><br>
+                Incansable, atenta y veloz, <br>
+                cuidas la calidad del equipo feroz.
+                <br><br>
+                Con todos los datos que el equipo precisa, <br>
+                DNI, IBANs y tarjetas sin prisa, <br>
+                conoce cada flujo, presente y futuro, <br>
+                y hace que probar todo sea seguro.
+                <br><br>
+                Mil pruebas, mil entornos, sin perder la sonrisa, <br>
+                eres nuestra guía, nuestra alegría precisa.
+                <br><br>
+                Por tu paciencia, tu cariño y tu humor, <br>
+                por aguantar mis bugs con tanto amor, <br>
+                te mando este detalle con todo mi fervor, <br>
+                ¡gracias por hacer mis días llenos de color! 🌈
+            </span>
+        </div>
+
+        <!-- Time -->
+        <div class="ig-time">Hace 2 horas</div>
+    </div>
+
+    <script>
+        function revealMessage() {
+            const shortCaption = document.getElementById('shortCaption');
+            const fullCaption = document.getElementById('fullCaption');
+
+            // Hide short caption and show full caption
+            shortCaption.classList.add('hidden');
+            fullCaption.classList.remove('hidden');
+
+            // Crear confetti
+            createConfetti();
+        }
+
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4CAF50', '#FFD700'];
+
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    confetti.style.opacity = '1';
+                    confetti.style.transition = 'all 3s ease-out';
+                    confetti.style.zIndex = '1000';
+
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => {
+                        confetti.style.top = '100vh';
+                        confetti.style.opacity = '0';
+                        confetti.style.transform = `rotate(${Math.random() * 720}deg)`;
+                    }, 10);
+
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 30);
+            }
+        }
+    </script>
+</body>
+</html>
